@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cha's Quick Lookup</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.18);
+    --accent: #6c63ff;
+    --accent2: #a78bfa;
+    --text: #f0eeff;
+    --text-muted: #8a86b0;
+    --text-dim: #4a4668;
+    --btn-bg: #1e1e2e;
+    --btn-hover: #2a2a3e;
+    --btn-border: rgba(108,99,255,0.3);
+    --glow: rgba(108,99,255,0.15);
+    --radius: 12px;
+    --radius-lg: 18px;
+  }
+
+  [data-theme="midnight"] {
+    --bg: #000510;
+    --surface: #050d1e;
+    --surface2: #0a1528;
+    --border: rgba(0,180,255,0.1);
+    --border-hover: rgba(0,180,255,0.25);
+    --accent: #00b4ff;
+    --accent2: #38d1f5;
+    --text: #e0f4ff;
+    --text-muted: #5b9ab5;
+    --text-dim: #2a4a5a;
+    --btn-bg: #081525;
+    --btn-hover: #0f2035;
+    --btn-border: rgba(0,180,255,0.3);
+    --glow: rgba(0,180,255,0.12);
+  }
+
+  [data-theme="forest"] {
+    --bg: #050d08;
+    --surface: #0b1a0e;
+    --surface2: #102516;
+    --border: rgba(34,197,94,0.1);
+    --border-hover: rgba(34,197,94,0.25);
+    --accent: #22c55e;
+    --accent2: #86efac;
+    --text: #e8fdf0;
+    --text-muted: #4a8c60;
+    --text-dim: #1e4a2e;
+    --btn-bg: #0b1e0f;
+    --btn-hover: #122a17;
+    --btn-border: rgba(34,197,94,0.3);
+    --glow: rgba(34,197,94,0.1);
+  }
+
+  [data-theme="ember"] {
+    --bg: #0f0500;
+    --surface: #1a0a00;
+    --surface2: #261200;
+    --border: rgba(251,113,0,0.12);
+    --border-hover: rgba(251,113,0,0.28);
+    --accent: #fb7100;
+    --accent2: #fbbf24;
+    --text: #fff5e8;
+    --text-muted: #9a6a30;
+    --text-dim: #4a2e00;
+    --btn-bg: #1e0f00;
+    --btn-hover: #2e1800;
+    --btn-border: rgba(251,113,0,0.3);
+    --glow: rgba(251,113,0,0.1);
+  }
+
+  [data-theme="rose"] {
+    --bg: #0f0508;
+    --surface: #1a0a10;
+    --surface2: #261018;
+    --border: rgba(244,63,94,0.12);
+    --border-hover: rgba(244,63,94,0.28);
+    --accent: #f43f5e;
+    --accent2: #fb7185;
+    --text: #fff0f3;
+    --text-muted: #9a4060;
+    --text-dim: #4a1828;
+    --btn-bg: #1e0810;
+    --btn-hover: #2e1020;
+    --btn-border: rgba(244,63,94,0.3);
+    --glow: rgba(244,63,94,0.1);
+  }
+
+  [data-theme="arctic"] {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface2: #f1f5f9;
+    --border: rgba(15,23,42,0.1);
+    --border-hover: rgba(15,23,42,0.2);
+    --accent: #6366f1;
+    --accent2: #818cf8;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --text-dim: #cbd5e1;
+    --btn-bg: #f8fafc;
+    --btn-hover: #e2e8f0;
+    --btn-border: rgba(99,102,241,0.3);
+    --glow: rgba(99,102,241,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    transition: background 0.4s, color 0.4s;
+    overflow-x: hidden;
+  }
+
+  /* Ambient glow bg */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(ellipse, var(--glow) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    transition: background 0.4s;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    transition: background 0.4s, border-color 0.4s;
+  }
+
+  [data-theme="arctic"] nav {
+    background: rgba(248,250,252,0.9);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .nav-logo span {
+    color: var(--accent);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ─── SETTINGS BUTTON ─── */
+  .settings-btn {
+    background: var(--btn-bg);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+
+  .settings-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+
+  .settings-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* ─── SETTINGS PANEL ─── */
+  .settings-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .settings-overlay.open { display: flex; align-items: flex-start; justify-content: flex-end; }
+
+  .settings-panel {
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    width: 320px;
+    height: 100vh;
+    padding: 28px 24px;
+    overflow-y: auto;
+    animation: slideIn 0.25s ease;
+    transition: background 0.4s;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(30px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  .settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .settings-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .close-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .close-btn:hover { color: var(--text); border-color: var(--border-hover); }
+
+  .settings-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+
+  /* ─── THEME GRID ─── */
+  .theme-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .theme-card {
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-card.active {
+    border-color: var(--accent);
+  }
+
+  .theme-card:hover:not(.active) {
+    transform: translateY(-1px);
+  }
+
+  .theme-swatch {
+    width: 100%;
+    height: 44px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-swatch-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 12px;
+  }
+
+  .theme-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .theme-card.active .theme-name { color: var(--accent); }
+
+  .check-mark {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-card.active .check-mark { display: flex; }
+
+  /* ─── BUTTON EDITOR ─── */
+  .btn-editor {
+    margin-bottom: 16px;
+  }
+
+  .btn-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .btn-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+  }
+
+  .btn-item input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+
+  .btn-item input::placeholder { color: var(--text-dim); }
+
+  .del-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 2px;
+    line-height: 1;
+    font-size: 16px;
+    transition: color 0.2s;
+  }
+
+  .del-btn:hover { color: #f43f5e; }
+
+  .add-btn-ctrl {
+    background: var(--btn-bg);
+    border: 1px dashed var(--border-hover);
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+    color: var(--text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .add-btn-ctrl:hover { border-color: var(--accent); color: var(--accent); }
+
+  .save-hint {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .hero-title span { color: var(--accent); }
+
+  .hero-sub {
+    text-align: center;
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  /* ─── SEARCH BAR ─── */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 6px 6px 6px 20px;
+    gap: 10px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .search-bar:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--glow);
+  }
+
+  .search-icon {
+    color: var(--text-dim);
+    flex-shrink: 0;
+    transition: color 0.2s;
+  }
+
+  .search-bar:focus-within .search-icon { color: var(--accent); }
+
+  #url-input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    min-width: 0;
+  }
+
+  #url-input::placeholder { color: var(--text-dim); font-family: 'Inter', sans-serif; }
+
+  .go-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 11px 22px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .go-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+  .go-btn:active { transform: translateY(0); }
+
+  /* ─── COPY BUTTONS ─── */
+  .copy-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    padding-left: 2px;
+  }
+
+  #copy-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .copy-btn {
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.18s;
+    position: relative;
+  }
+
+  .copy-btn:hover {
+    background: var(--btn-hover);
+    border-color: var(--accent);
+    color: var(--text);
+    transform: translateY(-1px);
+  }
+
+  .copy-btn.copied {
+    border-color: #22c55e;
+    color: #22c55e;
+  }
+
+  .copy-btn svg { flex-shrink: 0; }
+
+  /* ─── FRAME AREA ─── */
+  .frame-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    min-height: 80px;
+    transition: all 0.3s;
+  }
+
+  .frame-empty {
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .frame-empty-icon {
+    font-size: 40px;
+    margin-bottom: 14px;
+    opacity: 0.3;
+  }
+
+  .frame-empty p {
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+
+  .frame-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+  }
+
+  .frame-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .frame-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-hover);
+  }
+
+  .frame-url-display {
+    flex: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #site-frame {
+    width: 100%;
+    height: 580px;
+    border: none;
+    display: none;
+    background: white;
+  }
+
+  /* ─── FULLSCREEN ─── */
+  .frame-wrap.fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    border-radius: 0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .frame-wrap.fullscreen #site-frame {
+    flex: 1;
+    height: 0;
+  }
+
+  .fullscreen-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .fullscreen-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+    background: var(--btn-hover);
+  }
+
+  .esc-hint {
+    font-size: 11px;
+    color: var(--text-dim);
+    display: none;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .esc-hint kbd {
+    background: var(--surface);
+    border: 1px solid var(--border-hover);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  .frame-wrap.fullscreen .esc-hint { display: flex; }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--accent);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Syne', sans-serif;
+    z-index: 999;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    white-space: nowrap;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">Cha's <span>Quick</span> Lookup</div>
+  <div class="nav-right">
+    <button class="settings-btn" onclick="openSettings()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Settings
+    </button>
+  </div>
+</nav>
+
+<!-- SETTINGS OVERLAY -->
+<div class="settings-overlay" id="settings-overlay" onclick="overlayClick(event)">
+  <div class="settings-panel">
+    <div class="settings-header">
+      <div class="settings-title">Settings</div>
+      <button class="close-btn" onclick="closeSettings()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
+      </button>
+    </div>
+
+    <div class="settings-section-label">Theme</div>
+    <div class="theme-grid" id="theme-grid">
+      <!-- Injected by JS -->
+    </div>
+
+    <div class="settings-section-label">Quick Copy Buttons</div>
+    <div class="btn-editor">
+      <div class="btn-list" id="btn-list"></div>
+      <button class="add-btn-ctrl" onclick="addBtnItem()">+ Add button</button>
+      <div class="save-hint">Changes save automatically</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+  <h1 class="hero-title">Cha's <span>Quick</span> Lookup</h1>
+  <p class="hero-sub">Enter any URL to open it instantly below</p>
+
+  <div class="search-wrap">
+    <div class="search-bar">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="url-input" type="url" placeholder="https://example.com" autocomplete="off" spellcheck="false" />
+      <button class="go-btn" onclick="loadURL()">
+        Go
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="copy-section-label">Quick copy</div>
+  <div id="copy-buttons"></div>
+
+  <div class="frame-wrap" id="frame-wrap">
+    <div class="frame-empty" id="frame-empty">
+      <div class="frame-empty-icon">🔍</div>
+      <p>Enter a URL above to load it here</p>
+    </div>
+    <div class="frame-bar" id="frame-bar" style="display:none;">
+      <div class="frame-dots">
+        <div class="frame-dot" style="background:#f43f5e"></div>
+        <div class="frame-dot" style="background:#fbbf24"></div>
+        <div class="frame-dot" style="background:#22c55e"></div>
+      </div>
+      <div class="frame-url-display" id="frame-url-display"></div>
+      <div class="esc-hint"><kbd>Esc</kbd> to exit</div>
+      <button class="fullscreen-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle fullscreen">
+        <svg id="fs-icon-expand" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        <svg id="fs-icon-shrink" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
+      </button>
+    </div>
+    <iframe id="site-frame" title="Loaded site"></iframe>
+  </div>
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  const BASE_URL = 'https://demo.webfuse.com/+iframetest';
+
+  const THEMES = [
+    { id: 'default', name: 'Void', bg: '#0a0a0f', accent: '#6c63ff', bar: '#6c63ff' },
+    { id: 'midnight', name: 'Midnight', bg: '#000510', accent: '#00b4ff', bar: '#00b4ff' },
+    { id: 'forest', name: 'Forest', bg: '#050d08', accent: '#22c55e', bar: '#22c55e' },
+    { id: 'ember', name: 'Ember', bg: '#0f0500', accent: '#fb7100', bar: '#fb7100' },
+    { id: 'rose', name: 'Rose', bg: '#0f0508', accent: '#f43f5e', bar: '#f43f5e' },
+    { id: 'arctic', name: 'Arctic', bg: '#f8fafc', accent: '#6366f1', bar: '#6366f1' },
+  ];
+
+  const DEFAULT_BUTTONS = [
+    'https://google.com',
+    'https://youtube.com',
+    'https://github.com',
+    'https://wikipedia.org',
+    'https://reddit.com',
+  ];
+
+  // ─── STORAGE ───
+  function save(key, val) {
+    try { localStorage.setItem('cql_' + key, JSON.stringify(val)); } catch(e) {}
+  }
+  function load(key, def) {
+    try {
+      const v = localStorage.getItem('cql_' + key);
+      return v !== null ? JSON.parse(v) : def;
+    } catch(e) { return def; }
+  }
+
+  // ─── THEME ───
+  let currentTheme = load('theme', 'default');
+
+  function applyTheme(id) {
+    currentTheme = id;
+    document.body.setAttribute('data-theme', id === 'default' ? '' : id);
+    save('theme', id);
+    renderThemeGrid();
+  }
+
+  function renderThemeGrid() {
+    const grid = document.getElementById('theme-grid');
+    grid.innerHTML = THEMES.map(t => `
+      <div class="theme-card ${currentTheme === t.id ? 'active' : ''}" onclick="applyTheme('${t.id}')">
+        <div class="theme-swatch" style="background:${t.bg}">
+          <div class="theme-swatch-bar" style="background:${t.accent}"></div>
+        </div>
+        <div class="theme-name">${t.name}</div>
+        <div class="check-mark">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ─── COPY BUTTONS ───
+  let buttons = load('buttons', DEFAULT_BUTTONS);
+
+  function renderCopyButtons() {
+    const container = document.getElementById('copy-buttons');
+    container.innerHTML = '';
+    buttons.forEach((text, i) => {
+      if (!text.trim()) return;
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.innerHTML = `
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        ${text}
+      `;
+      btn.onclick = () => copyText(btn, text);
+      container.appendChild(btn);
+    });
+  }
+
+  function copyText(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      const orig = btn.innerHTML;
+      btn.innerHTML = `
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Copied!
+      `;
+      showToast('Copied to clipboard!');
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = orig;
+      }, 1800);
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Copied!');
+    });
+  }
+
+  // ─── BUTTON EDITOR ───
+  function renderBtnList() {
+    const list = document.getElementById('btn-list');
+    list.innerHTML = '';
+    buttons.forEach((val, i) => {
+      const item = document.createElement('div');
+      item.className = 'btn-item';
+      item.innerHTML = `
+        <input type="text" value="${val.replace(/"/g, '&quot;')}" placeholder="Enter text..." data-i="${i}" oninput="updateBtn(${i}, this.value)" />
+        <button class="del-btn" onclick="removeBtn(${i})">×</button>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  function updateBtn(i, val) {
+    buttons[i] = val;
+    save('buttons', buttons);
+    renderCopyButtons();
+  }
+
+  function addBtnItem() {
+    buttons.push('');
+    save('buttons', buttons);
+    renderBtnList();
+    renderCopyButtons();
+    const inputs = document.querySelectorAll('#btn-list input');
+    if (inputs.length) inputs[inputs.length - 1].focus();
+  }
+
+  function removeBtn(i) {
+    buttons.splice(i, 1);
+    save('buttons', buttons);
+    renderBtnList();
+    renderCopyButtons();
+  }
+
+  // ─── URL LOADING ───
+  function loadURL() {
+    let raw = document.getElementById('url-input').value.trim();
+    if (!raw) return;
+    if (!/^https?:\/\//i.test(raw)) raw = 'https://' + raw;
+
+    const target = BASE_URL + '?url=' + encodeURIComponent(raw);
+    const frame = document.getElementById('site-frame');
+    const empty = document.getElementById('frame-empty');
+    const bar = document.getElementById('frame-bar');
+    const urlDisplay = document.getElementById('frame-url-display');
+
+    empty.style.display = 'none';
+    bar.style.display = 'flex';
+    frame.style.display = 'block';
+    frame.src = target;
+    urlDisplay.textContent = raw;
+  }
+
+  document.getElementById('url-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') loadURL();
+  });
+
+  // ─── FULLSCREEN ───
+  let isFullscreen = false;
+
+  function toggleFullscreen() {
+    const wrap = document.getElementById('frame-wrap');
+    const expand = document.getElementById('fs-icon-expand');
+    const shrink = document.getElementById('fs-icon-shrink');
+    isFullscreen = !isFullscreen;
+    wrap.classList.toggle('fullscreen', isFullscreen);
+    expand.style.display = isFullscreen ? 'none' : '';
+    shrink.style.display = isFullscreen ? '' : 'none';
+    document.body.style.overflow = isFullscreen ? 'hidden' : '';
+  }
+
+  function exitFullscreen() {
+    if (!isFullscreen) return;
+    toggleFullscreen();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') exitFullscreen();
+  });
+
+  // ─── SETTINGS PANEL ───
+  function openSettings() {
+    document.getElementById('settings-overlay').classList.add('open');
+    renderThemeGrid();
+    renderBtnList();
+  }
+
+  function closeSettings() {
+    document.getElementById('settings-overlay').classList.remove('open');
+  }
+
+  function overlayClick(e) {
+    if (e.target === document.getElementById('settings-overlay')) closeSettings();
+  }
+
+  // ─── TOAST ───
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+  }
+
+  // ─── INIT ───
+  applyTheme(currentTheme);
+  renderCopyButtons();
+</script>
+</body>
+</html>
