@@ -17,8 +17,8 @@
     --accent-bright: #9d8fff;
     --accent-dim: rgba(124,108,255,0.15);
     --text: #eeeef8;
-    --text-muted: #78749a;
-    --text-dim: #3d3a56;
+    --text-muted: #8884a8;
+    --text-dim: #454260;
     --btn-bg: #14141e;
     --btn-hover: #1e1e2e;
     --btn-border: rgba(124,108,255,0.22);
@@ -40,7 +40,7 @@
     --accent-bright: #33ccff;
     --accent-dim: rgba(0,170,255,0.12);
     --text: #d8f0ff;
-    --text-muted: #4a8aaa;
+    --text-muted: #5a9abb;
     --text-dim: #1e3a50;
     --btn-bg: #071420;
     --btn-hover: #0c1e30;
@@ -61,7 +61,7 @@
     --accent-bright: #4ade80;
     --accent-dim: rgba(34,197,94,0.1);
     --text: #dcfce7;
-    --text-muted: #3d8a55;
+    --text-muted: #4d9a65;
     --text-dim: #143a20;
     --btn-bg: #081808;
     --btn-hover: #0e220f;
@@ -82,7 +82,7 @@
     --accent-bright: #fb923c;
     --accent-dim: rgba(251,113,0,0.1);
     --text: #fff3e0;
-    --text-muted: #8a5a20;
+    --text-muted: #9a6a30;
     --text-dim: #3a2000;
     --btn-bg: #180c00;
     --btn-hover: #241400;
@@ -103,7 +103,7 @@
     --accent-bright: #fb7185;
     --accent-dim: rgba(244,63,94,0.1);
     --text: #ffeef2;
-    --text-muted: #8a3a50;
+    --text-muted: #9a4a62;
     --text-dim: #3a101c;
     --btn-bg: #18060c;
     --btn-hover: #240c14;
@@ -125,7 +125,7 @@
     --accent-dim: rgba(99,102,241,0.08);
     --text: #0f172a;
     --text-muted: #64748b;
-    --text-dim: #c0c8d8;
+    --text-dim: #b8c0d0;
     --btn-bg: #f8f9fc;
     --btn-hover: #e8ebf2;
     --btn-border: rgba(99,102,241,0.2);
@@ -140,6 +140,8 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
     min-height: 100vh;
     transition: background 0.5s ease, color 0.5s ease;
     overflow-x: hidden;
@@ -191,7 +193,6 @@
     75% { transform: translate(30px, 20px) scale(1.04); }
   }
 
-  /* Subtle grid overlay */
   .bg-grid {
     position: fixed;
     inset: 0;
@@ -215,31 +216,32 @@
     backdrop-filter: blur(20px) saturate(1.2);
     -webkit-backdrop-filter: blur(20px) saturate(1.2);
     border-bottom: 1px solid var(--border);
-    padding: 0 24px;
+    padding: 0 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 52px;
+    height: 56px;
     transition: background 0.5s, border-color 0.5s;
   }
 
   .nav-logo {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 16px;
-    letter-spacing: -0.5px;
+    font-size: 17px;
+    letter-spacing: -0.3px;
     color: var(--text);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
   }
 
   .nav-logo-dot {
     width: 8px; height: 8px;
     border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 10px var(--accent-dim);
+    box-shadow: 0 0 12px var(--accent-dim);
     animation: pulse 2.5s ease-in-out infinite;
+    flex-shrink: 0;
   }
 
   @keyframes pulse {
@@ -250,33 +252,35 @@
   .nav-right {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
   }
 
   .kbd-hint {
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-dim);
-    padding: 3px 8px;
+    padding: 4px 10px;
     border: 1px solid var(--border);
-    border-radius: 5px;
-    letter-spacing: 0.02em;
+    border-radius: 6px;
+    letter-spacing: 0.03em;
+    line-height: 1;
   }
 
   .settings-btn {
     background: var(--btn-bg);
     border: 1px solid var(--border);
     color: var(--text-muted);
-    padding: 6px 12px;
+    padding: 7px 14px;
     border-radius: 8px;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     transition: all 0.2s;
+    line-height: 1;
   }
 
   .settings-btn:hover {
@@ -302,9 +306,9 @@
   .settings-panel {
     background: var(--surface);
     border-left: 1px solid var(--border);
-    width: 310px;
+    width: 320px;
     height: 100vh;
-    padding: 24px 20px;
+    padding: 28px 22px;
     overflow-y: auto;
     animation: panelIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     transition: background 0.5s;
@@ -319,23 +323,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
 
   .settings-title {
     font-family: 'Syne', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--text);
+    letter-spacing: -0.3px;
   }
 
   .close-btn {
     background: none;
     border: 1px solid var(--border);
     color: var(--text-muted);
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
+    width: 30px; height: 30px;
+    border-radius: 7px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -346,25 +350,26 @@
   .close-btn:hover { color: var(--text); border-color: var(--border-hover); background: var(--btn-hover); }
 
   .settings-section-label {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-dim);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    line-height: 1;
   }
 
   .theme-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 
   .theme-card {
     border: 2px solid transparent;
     border-radius: 10px;
-    padding: 10px 8px 8px;
+    padding: 10px 8px 9px;
     cursor: pointer;
     transition: all 0.2s;
     position: relative;
@@ -376,9 +381,9 @@
 
   .theme-swatch {
     width: 100%;
-    height: 36px;
+    height: 38px;
     border-radius: 6px;
-    margin-bottom: 6px;
+    margin-bottom: 7px;
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255,255,255,0.05);
@@ -391,18 +396,19 @@
   }
 
   .theme-name {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--text-dim);
     text-align: center;
     transition: color 0.2s;
+    line-height: 1;
   }
 
   .theme-card.active .theme-name { color: var(--accent-bright); }
 
   .check-mark {
     position: absolute;
-    top: 4px; right: 4px;
+    top: 5px; right: 5px;
     width: 16px; height: 16px;
     background: var(--accent);
     border-radius: 50%;
@@ -419,8 +425,8 @@
   .btn-list {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    margin-bottom: 10px;
+    gap: 6px;
+    margin-bottom: 12px;
     max-height: 260px;
     overflow-y: auto;
     padding-right: 2px;
@@ -429,11 +435,11 @@
   .btn-item {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 7px 10px;
+    padding: 9px 12px;
     transition: border-color 0.2s;
   }
 
@@ -446,7 +452,8 @@
     outline: none;
     color: var(--text);
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 12px;
+    line-height: 1.4;
     min-width: 0;
   }
 
@@ -457,9 +464,9 @@
     border: none;
     color: var(--text-dim);
     cursor: pointer;
-    padding: 2px;
+    padding: 0 2px;
     line-height: 1;
-    font-size: 15px;
+    font-size: 18px;
     transition: color 0.2s;
     flex-shrink: 0;
   }
@@ -470,51 +477,54 @@
     background: var(--surface2);
     border: 1px dashed var(--border-hover);
     border-radius: 8px;
-    padding: 8px;
+    padding: 10px;
     width: 100%;
     color: var(--text-dim);
-    font-size: 12px;
+    font-size: 13px;
     cursor: pointer;
     transition: all 0.2s;
     font-family: 'Inter', sans-serif;
+    line-height: 1;
   }
 
   .add-btn-ctrl:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
 
   .save-hint {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-dim);
     text-align: center;
-    margin-top: 6px;
+    margin-top: 8px;
+    line-height: 1;
   }
 
   /* ─── MAIN CONTENT ─── */
   main {
     position: relative;
     z-index: 1;
-    max-width: 720px;
+    max-width: 740px;
     margin: 0 auto;
-    padding: 56px 20px 80px;
+    padding: 60px 24px 90px;
   }
 
   .hero-section {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 44px;
   }
 
   .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     background: var(--accent-dim);
     border: 1px solid var(--btn-border);
     border-radius: 999px;
-    padding: 5px 14px 5px 10px;
-    font-size: 11px;
+    padding: 6px 16px 6px 12px;
+    font-size: 12px;
     font-weight: 500;
     color: var(--accent-bright);
-    margin-bottom: 20px;
-    letter-spacing: 0.01em;
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+    line-height: 1;
   }
 
   .hero-badge-dot {
@@ -522,16 +532,17 @@
     border-radius: 50%;
     background: var(--accent);
     animation: pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
   }
 
   .hero-title {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(30px, 6vw, 48px);
+    font-size: clamp(32px, 6vw, 52px);
     font-weight: 800;
-    letter-spacing: -1.5px;
-    line-height: 1.08;
+    letter-spacing: -1px;
+    line-height: 1.15;
     color: var(--text);
-    margin-bottom: 10px;
+    margin-bottom: 14px;
   }
 
   .hero-title span {
@@ -542,17 +553,17 @@
   }
 
   .hero-sub {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-muted);
     font-weight: 300;
     letter-spacing: 0.01em;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   /* ─── SEARCH BAR ─── */
   .search-wrap {
     position: relative;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 
   .search-bar {
@@ -561,10 +572,11 @@
     background: var(--surface);
     border: 1.5px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 5px 5px 5px 18px;
-    gap: 10px;
+    padding: 8px 8px 8px 20px;
+    gap: 12px;
     transition: border-color 0.25s, box-shadow 0.25s, background 0.5s;
     box-shadow: var(--shadow);
+    height: 54px;
   }
 
   .search-bar:focus-within {
@@ -603,21 +615,23 @@
     outline: none;
     color: var(--text);
     font-family: 'DM Mono', monospace;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 400;
-    letter-spacing: 0.01em;
-    padding: 6px 0 2px;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    padding: 0;
   }
 
-  #url-input::placeholder { color: var(--text-dim); font-family: 'Inter', sans-serif; font-size: 13px; }
+  #url-input::placeholder { color: var(--text-dim); font-family: 'Inter', sans-serif; font-size: 14px; }
 
   .search-error {
-    font-size: 11px;
+    font-size: 12px;
     color: #f43f5e;
-    height: 16px;
-    line-height: 16px;
+    height: 18px;
+    line-height: 18px;
     opacity: 0;
     transition: opacity 0.2s;
+    margin-top: 2px;
   }
 
   .search-error.visible { opacity: 1; }
@@ -626,20 +640,22 @@
     background: var(--accent);
     color: #fff;
     border: none;
-    border-radius: 12px;
-    padding: 10px 20px;
+    border-radius: 11px;
+    padding: 0 22px;
+    height: 38px;
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     transition: all 0.2s;
     white-space: nowrap;
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
+    line-height: 1;
   }
 
   .go-btn::after {
@@ -660,16 +676,17 @@
 
   /* ─── COPY BUTTONS ─── */
   .copy-section-label {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-dim);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     padding-left: 2px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
+    line-height: 1;
   }
 
   .copy-section-label::after {
@@ -682,27 +699,29 @@
   #copy-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 36px;
+    gap: 8px;
+    margin-bottom: 40px;
   }
 
   .copy-btn {
     background: var(--btn-bg);
     border: 1px solid var(--border);
     color: var(--text-muted);
-    padding: 7px 13px;
-    border-radius: 8px;
+    padding: 9px 15px;
+    border-radius: 9px;
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 400;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     transition: all 0.18s;
     position: relative;
     overflow: hidden;
     max-width: 100%;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
   }
 
   .copy-btn .btn-text {
@@ -736,75 +755,83 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    min-height: 80px;
-    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    min-height: 100px;
+    transition: background 0.5s, border-color 0.5s;
     box-shadow: var(--shadow);
+    display: block;
   }
 
   .frame-empty {
-    padding: 56px 24px;
+    padding: 60px 24px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
   }
 
   .frame-empty-icon {
-    width: 56px; height: 56px;
+    width: 60px; height: 60px;
     border-radius: 16px;
     background: var(--surface2);
     border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
     opacity: 0.6;
   }
 
   .frame-empty-text {
-    font-size: 13px;
+    font-size: 15px;
     color: var(--text-dim);
     font-weight: 400;
+    line-height: 1.4;
   }
 
   .frame-empty-sub {
-    font-size: 11px;
+    font-size: 13px;
     color: var(--text-dim);
-    opacity: 0.6;
+    opacity: 0.5;
+    line-height: 1.4;
   }
 
   .frame-bar {
     display: flex;
     align-items: center;
-    padding: 8px 14px;
+    padding: 10px 16px;
     background: var(--surface2);
     border-bottom: 1px solid var(--border);
-    gap: 10px;
+    gap: 12px;
   }
 
   .frame-dots {
     display: flex;
-    gap: 4px;
+    gap: 5px;
     flex-shrink: 0;
   }
 
   .frame-dot {
-    width: 8px; height: 8px;
+    width: 9px; height: 9px;
     border-radius: 50%;
   }
 
   .frame-url-display {
     flex: 1;
     font-family: 'DM Mono', monospace;
-    font-size: 10.5px;
+    font-size: 12px;
     color: var(--text-dim);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
   }
 
-  /* ─── LOADING BAR ─── */
+  .frame-inner {
+    position: relative;
+    line-height: 0;
+  }
+
   .frame-loading-bar {
     height: 2px;
     background: var(--accent);
@@ -834,28 +861,49 @@
     transition: width 0.2s, opacity 0.4s 0.2s;
   }
 
+  #site-frame {
+    width: 100%;
+    height: 580px;
+    border: none;
+    display: none;
+    background: white;
+  }
+
   /* ─── FULLSCREEN ─── */
   .frame-wrap.fullscreen {
-    position: fixed;
-    inset: 0;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
     z-index: 500;
     border-radius: 0;
     border: none;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
+    margin: 0;
+  }
+
+  .frame-wrap.fullscreen .frame-inner {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
   }
 
   .frame-wrap.fullscreen #site-frame {
-    flex: 1;
-    height: 0;
+    width: 100%;
+    height: 100%;
+    flex: none;
   }
 
   .fullscreen-btn {
     background: none;
     border: 1px solid var(--border);
     color: var(--text-dim);
-    width: 26px; height: 26px;
-    border-radius: 5px;
+    width: 30px; height: 30px;
+    border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -871,42 +919,32 @@
   }
 
   .esc-hint {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-dim);
     display: none;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
     white-space: nowrap;
+    line-height: 1;
   }
 
   .esc-hint kbd {
     background: var(--surface);
     border: 1px solid var(--border-hover);
     border-radius: 4px;
-    padding: 1px 5px;
+    padding: 2px 7px;
     font-family: 'DM Mono', monospace;
-    font-size: 9px;
+    font-size: 11px;
     color: var(--text-muted);
+    line-height: 1;
   }
 
   .frame-wrap.fullscreen .esc-hint { display: flex; }
 
-  #site-frame {
-    width: 100%;
-    height: 560px;
-    border: none;
-    display: none;
-    background: white;
-  }
-
-  .frame-inner {
-    position: relative;
-  }
-
   /* ─── TOAST ─── */
   .toast-container {
     position: fixed;
-    bottom: 24px;
+    bottom: 28px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
@@ -917,9 +955,9 @@
     background: var(--surface2);
     border: 1px solid var(--btn-border);
     color: var(--accent-bright);
-    padding: 8px 18px;
+    padding: 10px 20px;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     font-family: 'Syne', sans-serif;
     transform: translateY(60px);
@@ -928,14 +966,15 @@
     white-space: nowrap;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    line-height: 1;
   }
 
   .toast.show { transform: translateY(0); opacity: 1; }
 
   .toast-icon {
-    width: 14px; height: 14px;
+    width: 18px; height: 18px;
     background: var(--accent);
     border-radius: 50%;
     display: flex;
@@ -945,21 +984,23 @@
   }
 
   /* ─── SCROLLBAR ─── */
-  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
 
   /* ─── RESPONSIVE ─── */
-  @media (max-width: 600px) {
-    main { padding: 40px 14px 60px; }
-    .search-bar { padding: 4px 4px 4px 14px; }
-    .go-btn { padding: 10px 14px; }
+  @media (max-width: 640px) {
+    main { padding: 44px 16px 60px; }
+    .search-bar { padding: 6px 6px 6px 16px; height: 50px; }
+    .go-btn { padding: 0 16px; height: 36px; }
     .go-btn span { display: none; }
-    #copy-buttons { gap: 5px; }
-    .copy-btn { padding: 6px 10px; font-size: 10px; }
+    #copy-buttons { gap: 6px; }
+    .copy-btn { padding: 8px 12px; font-size: 11px; }
     .kbd-hint { display: none; }
     .theme-grid { grid-template-columns: repeat(3, 1fr); }
     .settings-panel { width: 280px; }
+    .hero-sub { font-size: 14px; }
+    #site-frame { height: 440px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -972,7 +1013,6 @@
 </head>
 <body>
 
-<!-- BACKGROUND EFFECTS -->
 <div class="bg-orbs">
   <div class="bg-orb"></div>
   <div class="bg-orb"></div>
@@ -1030,14 +1070,14 @@
 
   <div class="search-wrap">
     <div class="search-bar" id="search-bar">
-      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <svg class="search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <div class="search-center">
         <input id="url-input" type="url" placeholder="Paste or type a URL..." autocomplete="off" spellcheck="false" />
         <div class="search-error" id="search-error">Please enter a valid URL</div>
       </div>
       <button class="go-btn" onclick="loadURL()" aria-label="Load URL">
         <span>Go</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </button>
     </div>
   </div>
@@ -1048,7 +1088,7 @@
   <div class="frame-wrap" id="frame-wrap">
     <div class="frame-empty" id="frame-empty">
       <div class="frame-empty-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
       <div class="frame-empty-text">No site loaded yet</div>
       <div class="frame-empty-sub">Enter a URL above to preview it here</div>
@@ -1062,8 +1102,8 @@
       <div class="frame-url-display" id="frame-url-display"></div>
       <div class="esc-hint"><kbd>Q</kbd> exit</div>
       <button class="fullscreen-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle fullscreen" aria-label="Toggle fullscreen">
-        <svg id="fs-icon-expand" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-        <svg id="fs-icon-shrink" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
+        <svg id="fs-icon-expand" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        <svg id="fs-icon-shrink" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
       </button>
     </div>
     <div class="frame-inner">
@@ -1077,7 +1117,7 @@
 <div class="toast-container">
   <div class="toast" id="toast">
     <div class="toast-icon">
-      <svg width="8" height="8" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
     <span id="toast-text">Copied!</span>
   </div>
@@ -1087,12 +1127,12 @@
   const BASE_URL = 'https://demo.webfuse.com/+iframetest';
 
   const THEMES = [
-    { id: 'default', name: 'Void',    bg: '#08080d', accent: '#7c6cff' },
-    { id: 'midnight', name: 'Midnight', bg: '#020a14', accent: '#00aaff' },
-    { id: 'forest',   name: 'Forest',   bg: '#040c06', accent: '#22c55e' },
-    { id: 'ember',    name: 'Ember',    bg: '#0c0400', accent: '#f57000' },
-    { id: 'rose',     name: 'Rose',     bg: '#0c0306', accent: '#f43f5e' },
-    { id: 'arctic',   name: 'Arctic',   bg: '#f4f6fa', accent: '#6366f1' },
+    { id: 'default',  name: 'Void',     bg: '#08080d', accent: '#7c6cff' },
+    { id: 'midnight', name: 'Midnight',  bg: '#020a14', accent: '#00aaff' },
+    { id: 'forest',   name: 'Forest',    bg: '#040c06', accent: '#22c55e' },
+    { id: 'ember',    name: 'Ember',     bg: '#0c0400', accent: '#f57000' },
+    { id: 'rose',     name: 'Rose',      bg: '#0c0306', accent: '#f43f5e' },
+    { id: 'arctic',   name: 'Arctic',    bg: '#f4f6fa', accent: '#6366f1' },
   ];
 
   const DEFAULT_BUTTONS = [
@@ -1104,7 +1144,7 @@
     'https://classic.minecraft.net/',
   ];
 
-  // ─── STORAGE ───
+  /* ─── STORAGE ─── */
   function save(key, val) {
     try { localStorage.setItem('cql_' + key, JSON.stringify(val)); } catch(e) {}
   }
@@ -1115,7 +1155,7 @@
     } catch(e) { return def; }
   }
 
-  // ─── THEME ───
+  /* ─── THEME ─── */
   let currentTheme = load('theme', 'default');
 
   function applyTheme(id) {
@@ -1144,7 +1184,7 @@
     `).join('');
   }
 
-  // ─── COPY BUTTONS ───
+  /* ─── COPY BUTTONS ─── */
   let buttons = load('buttons', DEFAULT_BUTTONS);
 
   function renderCopyButtons() {
@@ -1156,7 +1196,7 @@
       btn.className = 'copy-btn';
       btn.setAttribute('aria-label', 'Copy ' + text);
       btn.innerHTML = `
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         <span class="btn-text">${escapeHTML(text)}</span>
       `;
       btn.onclick = () => copyText(btn, text);
@@ -1189,7 +1229,7 @@
     const orig = btn.innerHTML;
     btn.classList.add('copied');
     btn.innerHTML = `
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       <span class="btn-text">Copied</span>
     `;
     showToast('Copied to clipboard');
@@ -1199,7 +1239,7 @@
     }, 1600);
   }
 
-  // ─── BUTTON EDITOR ───
+  /* ─── BUTTON EDITOR ─── */
   function renderBtnList() {
     const list = document.getElementById('btn-list');
     list.innerHTML = '';
@@ -1236,9 +1276,7 @@
     renderCopyButtons();
   }
 
-  // ─── URL LOADING ───
-  let currentLoadedURL = '';
-
+  /* ─── URL LOADING ─── */
   function isValidURL(str) {
     try {
       const u = new URL(str.startsWith('http') ? str : 'https://' + str);
@@ -1252,7 +1290,6 @@
     const errorEl = document.getElementById('search-error');
     let raw = input.value.trim();
 
-    // Clear error state
     bar.classList.remove('has-error');
     errorEl.classList.remove('visible');
 
@@ -1275,7 +1312,6 @@
     }
 
     if (!/^https?:\/\//i.test(raw)) raw = 'https://' + raw;
-    currentLoadedURL = raw;
 
     const target = BASE_URL + '?url=' + encodeURIComponent(raw);
     const frame = document.getElementById('site-frame');
@@ -1289,46 +1325,38 @@
     frame.style.display = 'block';
     urlDisplay.textContent = raw;
 
-    // Reset and start loading bar
+    /* Reset loading bar */
     loadingBar.classList.remove('active', 'done');
     loadingBar.style.width = '0%';
-    void loadingBar.offsetWidth; // force reflow
+    void loadingBar.offsetWidth;
     loadingBar.classList.add('active');
 
     frame.src = target;
-
-    // Scroll frame into view smoothly
     document.getElementById('frame-wrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   document.getElementById('site-frame').addEventListener('load', function() {
-    const loadingBar = document.getElementById('frame-loading-bar');
-    loadingBar.classList.add('done');
+    document.getElementById('frame-loading-bar').classList.add('done');
   });
 
   document.getElementById('url-input').addEventListener('keydown', e => {
     if (e.key === 'Enter') loadURL();
   });
 
-  // Clear error on input
   document.getElementById('url-input').addEventListener('input', () => {
-    const bar = document.getElementById('search-bar');
-    const errorEl = document.getElementById('search-error');
-    bar.classList.remove('has-error');
-    errorEl.classList.remove('visible');
+    document.getElementById('search-bar').classList.remove('has-error');
+    document.getElementById('search-error').classList.remove('visible');
   });
 
-  // Auto-paste detection: if user pastes, auto-submit after brief delay
+  /* Auto-submit on paste if valid */
   document.getElementById('url-input').addEventListener('paste', () => {
     setTimeout(() => {
       const val = document.getElementById('url-input').value.trim();
-      if (isValidURL(val)) {
-        loadURL();
-      }
+      if (isValidURL(val)) loadURL();
     }, 100);
   });
 
-  // ─── FULLSCREEN ───
+  /* ─── FULLSCREEN ─── */
   let isFullscreen = false;
 
   function toggleFullscreen() {
@@ -1347,7 +1375,7 @@
     toggleFullscreen();
   }
 
-  // Q key to exit fullscreen (only when not typing in an input)
+  /* Q to exit fullscreen (not when typing) */
   document.addEventListener('keydown', e => {
     if (e.key === 'q' || e.key === 'Q') {
       const tag = document.activeElement.tagName.toLowerCase();
@@ -1355,9 +1383,16 @@
         exitFullscreen();
       }
     }
+    /* Escape closes settings only */
+    if (e.key === 'Escape') {
+      if (document.getElementById('settings-overlay').classList.contains('open')) {
+        closeSettings();
+        e.preventDefault();
+      }
+    }
   });
 
-  // ─── SETTINGS PANEL ───
+  /* ─── SETTINGS PANEL ─── */
   function openSettings() {
     document.getElementById('settings-overlay').classList.add('open');
     renderThemeGrid();
@@ -1372,28 +1407,17 @@
     if (e.target === document.getElementById('settings-overlay')) closeSettings();
   }
 
-  // Close settings on Escape (only when settings open)
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      if (document.getElementById('settings-overlay').classList.contains('open')) {
-        closeSettings();
-        e.preventDefault();
-      }
-    }
-  });
-
-  // ─── TOAST ───
+  /* ─── TOAST ─── */
   let toastTimer;
   function showToast(msg) {
     const t = document.getElementById('toast');
-    const txt = document.getElementById('toast-text');
-    txt.textContent = msg;
+    document.getElementById('toast-text').textContent = msg;
     t.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
   }
 
-  // ─── INIT ───
+  /* ─── INIT ─── */
   applyTheme(currentTheme);
   renderCopyButtons();
 </script>
