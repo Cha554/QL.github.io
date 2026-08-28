@@ -776,7 +776,23 @@
   });
 
   // ── quick-copy buttons ──
-  let buttons = load('buttons', DEFAULT_BUTTONS);
+  // BUTTONS_VERSION is bumped whenever DEFAULT_BUTTONS gains new entries, so
+  // visitors who already have a saved list still pick up the new links
+  // (any they removed on purpose, or added themselves, are left alone).
+  const BUTTONS_VERSION = 2;
+  let buttons = load('buttons', DEFAULT_BUTTONS.slice());
+  const savedVersion = load('buttonsVersion', 0);
+  if (savedVersion < BUTTONS_VERSION) {
+    const existing = new Set(buttons.map(b => b.trim().toLowerCase()));
+    DEFAULT_BUTTONS.forEach(url => {
+      if (!existing.has(url.trim().toLowerCase())) {
+        buttons.push(url);
+        existing.add(url.trim().toLowerCase());
+      }
+    });
+    save('buttons', buttons);
+    save('buttonsVersion', BUTTONS_VERSION);
+  }
 
   function renderCopyButtons() {
     const container = $('copy-buttons');
