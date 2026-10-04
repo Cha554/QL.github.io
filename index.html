@@ -29,7 +29,6 @@
     --radius-lg: 16px;
     --shadow: 0 8px 28px rgba(0,0,0,0.35);
   }
-
   [data-theme="midnight"] { --bg:#020a14; --surface:#06101e; --surface2:#0a1828; --border:rgba(0,170,255,0.09); --border-hover:rgba(0,170,255,0.2); --accent:#00aaff; --accent-bright:#33ccff; --accent-dim:rgba(0,170,255,0.12); --text:#d8f0ff; --text-muted:#5a9abb; --text-dim:#274a63; --btn-bg:#071420; --btn-hover:#0c1e30; --btn-border:rgba(0,170,255,0.22); --shadow:0 8px 28px rgba(0,10,30,0.45); }
   [data-theme="forest"]  { --bg:#040c06; --surface:#081508; --surface2:#0c1e0d; --border:rgba(34,197,94,0.09); --border-hover:rgba(34,197,94,0.2); --accent:#22c55e; --accent-bright:#4ade80; --accent-dim:rgba(34,197,94,0.1); --text:#dcfce7; --text-muted:#4d9a65; --text-dim:#22492c; --btn-bg:#081808; --btn-hover:#0e220f; --btn-border:rgba(34,197,94,0.22); --shadow:0 8px 28px rgba(0,10,0,0.45); }
   [data-theme="ember"]   { --bg:#0c0400; --surface:#160a02; --surface2:#201000; --border:rgba(251,113,0,0.11); --border-hover:rgba(251,113,0,0.24); --accent:#f57000; --accent-bright:#fb923c; --accent-dim:rgba(251,113,0,0.1); --text:#fff3e0; --text-muted:#9a6a30; --text-dim:#4a2c05; --btn-bg:#180c00; --btn-hover:#241400; --btn-border:rgba(251,113,0,0.24); --shadow:0 8px 28px rgba(10,4,0,0.45); }
@@ -44,12 +43,9 @@
   [data-theme="graphite"] { --bg:#0b0b0d; --surface:#131315; --surface2:#1a1a1d; --border:rgba(255,255,255,0.08); --border-hover:rgba(255,255,255,0.18); --accent:#94a3b8; --accent-bright:#cbd5e1; --accent-dim:rgba(148,163,184,0.12); --text:#eceef1; --text-muted:#82858c; --text-dim:#3c3c42; --btn-bg:#161618; --btn-hover:#1f1f22; --btn-border:rgba(148,163,184,0.22); --shadow:0 8px 28px rgba(0,0,0,0.45); }
   [data-theme="blush"]    { --bg:#fdf3f8; --surface:#ffffff; --surface2:#fbe8f1; --border:rgba(219,39,119,0.1); --border-hover:rgba(219,39,119,0.2); --accent:#ec4899; --accent-bright:#f472b6; --accent-dim:rgba(236,72,153,0.09); --text:#3a1228; --text-muted:#a5637f; --text-dim:#e8bdd3; --btn-bg:#fef6fa; --btn-hover:#fae0ed; --btn-border:rgba(236,72,153,0.22); --shadow:0 8px 28px rgba(80,10,45,0.08); }
   [data-theme="mint"]     { --bg:#f2faf5; --surface:#ffffff; --surface2:#e4f5ea; --border:rgba(16,185,129,0.1); --border-hover:rgba(16,185,129,0.2); --accent:#10b981; --accent-bright:#34d399; --accent-dim:rgba(16,185,129,0.09); --text:#0a2e20; --text-muted:#5c9a80; --text-dim:#bfe6d3; --btn-bg:#f6fcf9; --btn-hover:#e0f2e8; --btn-border:rgba(16,185,129,0.22); --shadow:0 8px 28px rgba(6,50,30,0.07); }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { color-scheme: dark; }
   [data-theme="arctic"], [data-theme="sand"], [data-theme="slate"], [data-theme="blush"], [data-theme="mint"] { color-scheme: light; }
-
   body {
     background: var(--bg);
     color: var(--text);
@@ -59,10 +55,6 @@
     min-height: 100vh;
     transition: background 0.4s ease, color 0.4s ease;
   }
-
-  /* ─── AMBIENT BACKGROUND ───
-     One static gradient wash + one slow-moving accent blob, kept far
-     lighter than a multi-orb blur stack so it stays smooth on any device. */
   .bg-wash {
     position: fixed;
     inset: 0;
@@ -72,7 +64,6 @@
       radial-gradient(ellipse 70% 45% at 18% -5%, var(--accent-dim), transparent 60%),
       radial-gradient(ellipse 60% 40% at 100% 100%, var(--accent-dim), transparent 65%);
   }
-
   .bg-blob {
     position: fixed;
     z-index: 0;
@@ -88,15 +79,12 @@
     will-change: transform;
     animation: drift 26s ease-in-out infinite;
   }
-
   @keyframes drift {
     0%, 100% { transform: translate3d(0, 0, 0); }
     50% { transform: translate3d(-60px, 40px, 0); }
   }
-
   body.paused .bg-blob,
   body.paused .pulse-dot { animation-play-state: paused; }
-
   .bg-grid {
     position: fixed;
     inset: 0;
@@ -110,8 +98,6 @@
     mask-image: linear-gradient(to bottom, black, transparent 72%);
     -webkit-mask-image: linear-gradient(to bottom, black, transparent 72%);
   }
-
-  /* ─── NAVBAR ─── */
   nav {
     position: sticky;
     top: 0;
@@ -126,7 +112,6 @@
     justify-content: space-between;
     height: 56px;
   }
-
   .nav-logo {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
@@ -137,7 +122,6 @@
     align-items: center;
     gap: 9px;
   }
-
   .pulse-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
@@ -145,14 +129,11 @@
     flex-shrink: 0;
     animation: pulse 2.4s ease-in-out infinite;
   }
-
   @keyframes pulse {
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.45; transform: scale(0.75); }
   }
-
   .nav-right { display: flex; align-items: center; gap: 8px; }
-
   .kbd-hint {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -162,7 +143,6 @@
     border-radius: 6px;
     line-height: 1;
   }
-
   .icon-btn {
     background: var(--btn-bg);
     border: 1px solid var(--border);
@@ -172,10 +152,8 @@
     line-height: 1;
     transition: border-color 0.15s, color 0.15s, background 0.15s;
   }
-
   .icon-btn:hover { border-color: var(--border-hover); color: var(--text); background: var(--btn-hover); }
   .icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
   .settings-btn {
     padding: 7px 14px;
     border-radius: 8px;
@@ -186,8 +164,6 @@
     gap: 6px;
   }
   .settings-btn svg { width: 14px; height: 14px; }
-
-  /* ─── SETTINGS PANEL ─── */
   .settings-overlay {
     display: none;
     position: fixed;
@@ -195,9 +171,7 @@
     z-index: 200;
     background: rgba(0,0,0,0.45);
   }
-
   .settings-overlay.open { display: flex; justify-content: flex-end; }
-
   .settings-panel {
     background: var(--surface);
     border-left: 1px solid var(--border);
@@ -208,13 +182,10 @@
     overflow-y: auto;
     animation: panelIn 0.22s ease-out;
   }
-
   @keyframes panelIn { from { transform: translateX(24px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-
   .settings-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
   .settings-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; }
   .close-btn { width: 30px; height: 30px; border-radius: 7px; display: flex; align-items: center; justify-content: center; }
-
   .settings-section-label {
     font-size: 11px;
     font-weight: 600;
@@ -223,14 +194,12 @@
     color: var(--text-dim);
     margin-bottom: 12px;
   }
-
   .theme-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     margin-bottom: 30px;
   }
-
   .theme-card {
     border: 2px solid transparent;
     border-radius: 10px;
@@ -239,19 +208,14 @@
     background: var(--surface2);
     transition: border-color 0.15s;
   }
-
   .theme-card.active { border-color: var(--accent); background: var(--accent-dim); }
   .theme-card:hover:not(.active) { border-color: var(--border-hover); }
   .theme-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
   .theme-swatch { width: 100%; height: 36px; border-radius: 6px; margin-bottom: 7px; position: relative; overflow: hidden; }
   .theme-swatch-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 9px; }
   .theme-name { font-size: 11px; font-weight: 600; color: var(--text-dim); text-align: center; }
   .theme-card.active .theme-name { color: var(--accent-bright); }
-
-  /* ─── BUTTON EDITOR ─── */
   .btn-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; max-height: 260px; overflow-y: auto; }
-
   .btn-item {
     display: flex;
     align-items: center;
@@ -261,9 +225,7 @@
     border-radius: 8px;
     padding: 9px 12px;
   }
-
   .btn-item:focus-within { border-color: var(--btn-border); }
-
   .btn-item input {
     flex: 1;
     background: none;
@@ -275,10 +237,8 @@
     min-width: 0;
   }
   .btn-item input::placeholder { color: var(--text-dim); }
-
   .del-btn { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 18px; line-height: 1; flex-shrink: 0; }
   .del-btn:hover { color: var(--danger); }
-
   .add-btn-ctrl {
     background: var(--surface2);
     border: 1px dashed var(--border-hover);
@@ -292,10 +252,7 @@
     transition: border-color 0.15s, color 0.15s, background 0.15s;
   }
   .add-btn-ctrl:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-
   .save-hint { font-size: 11px; color: var(--text-dim); text-align: center; margin-top: 8px; }
-
-  /* ─── MAIN ─── */
   main {
     position: relative;
     z-index: 1;
@@ -303,9 +260,7 @@
     margin: 0 auto;
     padding: 56px 24px 80px;
   }
-
   .hero-section { text-align: center; margin-bottom: 40px; }
-
   .hero-badge {
     display: inline-flex;
     align-items: center;
@@ -319,7 +274,6 @@
     color: var(--accent-bright);
     margin-bottom: 22px;
   }
-
   .hero-title {
     font-family: 'Caveat', cursive;
     font-size: clamp(40px, 7.5vw, 66px);
@@ -329,16 +283,13 @@
     padding-bottom: 0.15em;
     margin-bottom: 4px;
   }
-
   .hero-title span {
     background: linear-gradient(135deg, var(--accent), var(--accent-bright));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-
   .hero-sub { font-size: 15px; color: var(--text-muted); }
-
   .hero-credit {
     font-size: 13px;
     color: var(--text-dim);
@@ -346,10 +297,7 @@
     margin: 14px auto 0;
     line-height: 1.55;
   }
-
-  /* ─── SEARCH ─── */
   .search-wrap { margin-bottom: 30px; }
-
   .search-bar {
     display: flex;
     align-items: center;
@@ -362,23 +310,17 @@
     box-shadow: var(--shadow);
     transition: border-color 0.2s, box-shadow 0.2s;
   }
-
   .search-bar:focus-within { border-color: var(--accent); box-shadow: var(--shadow), 0 0 0 4px var(--accent-dim); }
-
   .search-bar.has-error { border-color: var(--danger); box-shadow: var(--shadow), 0 0 0 4px rgba(244,63,94,0.1); animation: headShake 0.35s ease; }
-
   @keyframes headShake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
     50% { transform: translateX(4px); }
     75% { transform: translateX(-2px); }
   }
-
   .search-icon { color: var(--text-dim); flex-shrink: 0; }
   .search-bar:focus-within .search-icon { color: var(--accent); }
-
   .search-center { flex: 1; display: flex; flex-direction: column; min-width: 0; }
-
   #url-input {
     width: 100%;
     background: none;
@@ -390,10 +332,8 @@
     padding: 0;
   }
   #url-input::placeholder { color: var(--text-dim); font-family: 'Inter', sans-serif; }
-
   .search-error { font-size: 12px; color: var(--danger); height: 18px; opacity: 0; transition: opacity 0.15s; margin-top: 2px; }
   .search-error.visible { opacity: 1; }
-
   .go-btn {
     background: var(--accent);
     color: #fff;
@@ -414,8 +354,6 @@
   .go-btn:hover { filter: brightness(1.12); }
   .go-btn:active { transform: scale(0.97); }
   .go-btn:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 2px; }
-
-  /* ─── COPY BUTTONS ─── */
   .copy-section-label {
     font-size: 11px;
     font-weight: 600;
@@ -429,9 +367,7 @@
     gap: 10px;
   }
   .copy-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
   #copy-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
-
   .copy-btn {
     background: var(--btn-bg);
     border: 1px solid var(--border);
@@ -447,7 +383,6 @@
     max-width: 100%;
     transition: border-color 0.15s, color 0.15s, background 0.15s;
   }
-
   .copy-btn .btn-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .copy-btn:hover { background: var(--btn-hover); border-color: var(--accent); color: var(--text); }
   .recents-panel { max-width: 900px; margin: 0 auto 28px; text-align: left; }
@@ -455,7 +390,6 @@
   #recents-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
   .recent-item { max-width: 100%; }
   @media (prefers-reduced-motion: reduce) { .bg-blob, .pulse-dot { animation: none !important; } }
-  /* Keep scrolling responsive on lower-powered devices. */
   .bg-wash, .bg-blob, .bg-grid { contain: strict; }
   @media (max-width: 800px) {
     .bg-blob { display: none; }
@@ -466,8 +400,6 @@
   .copy-btn.copied { border-color: var(--success); color: var(--success); background: rgba(34,197,94,0.08); }
   .copy-btn svg { flex-shrink: 0; opacity: 0.6; }
   .copy-btn:hover svg { opacity: 1; }
-
-  /* ─── FRAME ─── */
   .frame-wrap {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -475,7 +407,6 @@
     overflow: hidden;
     box-shadow: var(--shadow);
   }
-
   .frame-empty {
     padding: 56px 24px;
     text-align: center;
@@ -484,7 +415,6 @@
     align-items: center;
     gap: 14px;
   }
-
   .frame-empty-icon {
     width: 56px; height: 56px;
     border-radius: 16px;
@@ -495,17 +425,13 @@
     justify-content: center;
     opacity: 0.6;
   }
-
   .frame-empty-text { font-size: 15px; color: var(--text-dim); }
   .frame-empty-sub { font-size: 13px; color: var(--text-dim); opacity: 0.55; }
-
   .frame-bar { display: flex; align-items: center; padding: 10px 14px; background: var(--surface2); border-bottom: 1px solid var(--border); gap: 12px; }
   .frame-dots { display: flex; gap: 5px; flex-shrink: 0; }
   .frame-dot { width: 9px; height: 9px; border-radius: 50%; }
   .frame-url-display { flex: 1; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
   .frame-inner { position: relative; line-height: 0; }
-
   .frame-loading-bar {
     height: 2px;
     background: var(--accent);
@@ -518,9 +444,7 @@
   .frame-loading-bar.active { animation: loadingProgress 2s ease-out forwards; }
   @keyframes loadingProgress { 0% { width: 0%; } 40% { width: 55%; } 75% { width: 85%; } 100% { width: 96%; } }
   .frame-loading-bar.done { width: 100%; opacity: 0; }
-
   #site-frame { width: 100%; height: 580px; border: none; display: none; background: #fff; }
-
   .frame-wrap.fullscreen {
     position: fixed;
     inset: 0;
@@ -532,16 +456,11 @@
   }
   .frame-wrap.fullscreen .frame-inner { flex: 1; min-height: 0; }
   .frame-wrap.fullscreen #site-frame { width: 100%; height: 100%; }
-
   .fullscreen-btn { width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-
   .esc-hint { font-size: 11px; color: var(--text-dim); display: none; align-items: center; gap: 5px; white-space: nowrap; }
   .esc-hint kbd { background: var(--surface); border: 1px solid var(--border-hover); border-radius: 4px; padding: 2px 6px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); }
   .frame-wrap.fullscreen .esc-hint { display: flex; }
-
-  /* ─── TOAST ─── */
   .toast-container { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 999; pointer-events: none; }
-
   .toast {
     background: var(--surface2);
     border: 1px solid var(--btn-border);
@@ -561,13 +480,10 @@
     white-space: nowrap;
   }
   .toast.show { transform: translateY(0); opacity: 1; }
-
   .toast-icon { width: 18px; height: 18px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
-
   @media (max-width: 640px) {
     main { padding: 40px 16px 56px; }
     .search-bar { padding: 6px 6px 6px 16px; height: 50px; }
@@ -578,11 +494,9 @@
     #site-frame { height: 440px; }
     .bg-blob { width: 260px; height: 260px; filter: blur(50px); }
   }
-
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
-  /* Refresh: calm dashboard layout */
   :root { --bg:#0b1020; --surface:#111a2e; --surface2:#18243d; --accent:#60a5fa; --accent-bright:#bfdbfe; --accent-dim:rgba(96,165,250,.14); --text:#f3f7ff; --text-muted:#9aabc7; --text-dim:#607291; --btn-bg:#14213a; --btn-hover:#1d3153; --btn-border:rgba(96,165,250,.3); --border:rgba(180,205,255,.12); --border-hover:rgba(180,205,255,.28); --radius:14px; --radius-lg:22px; }
   body { background:linear-gradient(135deg,#0b1020 0%,#101a32 48%,#172b43 100%); }
   .bg-wash { background:radial-gradient(circle at 12% 8%,rgba(96,165,250,.2),transparent 30%),radial-gradient(circle at 88% 82%,rgba(45,212,191,.12),transparent 28%); }
@@ -606,7 +520,6 @@
   .frame-bar { padding:12px 16px; }
   #site-frame { height:650px; }
   @media(max-width:640px){ main{padding:44px 16px 64px}.hero-section{text-align:left}.hero-title{font-size:40px;letter-spacing:-1px}.hero-sub{font-size:16px}.search-bar{height:auto;min-height:60px;padding-left:16px}.go-btn{padding:0 18px}.copy-btn{max-width:100%}#site-frame{height:480px} }
-  /* Mist Services header and centered URL control */
   nav { height: 48px; padding: 0 24px; }
   .nav-logo { font-size: 14px; gap: 7px; }
   .nav-logo .pulse-dot { display:none; }
@@ -619,11 +532,9 @@
 </style>
 </head>
 <body>
-
 <div class="bg-wash"></div>
 <div class="bg-blob"></div>
 <div class="bg-grid"></div>
-
 <nav>
   <div class="nav-logo">
     <div class="pulse-dot"></div>
@@ -637,7 +548,6 @@
     </button>
   </div>
 </nav>
-
 <div class="settings-overlay" id="settings-overlay">
   <div class="settings-panel" role="dialog" aria-label="Settings">
     <div class="settings-header">
@@ -646,17 +556,14 @@
         <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
       </button>
     </div>
-
     <div class="settings-section-label">Theme</div>
     <div class="theme-grid" id="theme-grid"></div>
-
     <div class="settings-section-label">Quick copy buttons</div>
     <div class="btn-list" id="btn-list"></div>
     <button class="add-btn-ctrl" id="btn-add">+ Add button</button>
     <div class="save-hint">Changes save automatically</div>
   </div>
 </div>
-
 <main>
   <div class="hero-section">
     <div class="hero-badge">
@@ -665,9 +572,8 @@
     </div>
     <h1 class="hero-title">Quick <span>LookUp</span></h1>
     <p class="hero-sub">Paste a URL to open it here, without the extra tabs.</p>
-    <p class="hero-credit">Enter the complete web address. Some websites may prevent embedded viewing.</p>
+    <p class="hero-credit">Enter the complete web address. Some websites may prevent embedded viewing. Adult content is blocked.</p>
   </div>
-
   <div class="search-wrap">
     <div class="search-bar" id="search-bar">
       <svg class="search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -681,7 +587,6 @@
       </button>
     </div>
   </div>
-
   <div class="copy-section-label">Quick copy</div>
   <div id="copy-buttons"></div>
   <section class="recents-panel" id="recents-panel" hidden>
@@ -689,7 +594,6 @@
     <div id="recents-list"></div>
     <button class="add-btn-ctrl" id="clear-recents" type="button">Clear recents</button>
   </section>
-
   <div class="frame-wrap" id="frame-wrap">
     <div class="frame-empty" id="frame-empty">
       <div class="frame-empty-icon">
@@ -717,7 +621,6 @@
     </div>
   </div>
 </main>
-
 <div class="toast-container">
   <div class="toast" id="toast">
     <div class="toast-icon">
@@ -726,13 +629,10 @@
     <span id="toast-text">Copied!</span>
   </div>
 </div>
-
 <script>
 (function () {
   'use strict';
-
   const BASE_URL = 'https://demo.webfuse.com/+iframetest';
-
   const THEMES = [
     { id: 'default',  name: 'Void',     bg: '#08080d', accent: '#7c6cff' },
     { id: 'midnight', name: 'Midnight', bg: '#020a14', accent: '#00aaff' },
@@ -750,7 +650,6 @@
     { id: 'blush',    name: 'Blush',    bg: '#fdf3f8', accent: '#ec4899' },
     { id: 'mint',     name: 'Mint',     bg: '#f2faf5', accent: '#10b981' },
   ];
-
   const DEFAULT_BUTTONS = [
     'https://cineby.io/',
     'https://crossyroadgame.io/',
@@ -767,6 +666,111 @@
     'https://www.tiktok.com/',
     'https://www.facebook.com/',
   ];
+
+  // ── Adult / porn content blocklist ──
+  const BLOCKED_DOMAINS = [
+    'pornhub.com', 'www.pornhub.com', 'xvideos.com', 'www.xvideos.com',
+    'xhamster.com', 'www.xhamster.com', 'redtube.com', 'www.redtube.com',
+    'youporn.com', 'www.youporn.com', 'tube8.com', 'www.tube8.com',
+    'spankbang.com', 'www.spankbang.com', 'xnxx.com', 'www.xnxx.com',
+    'brazzers.com', 'www.brazzers.com', 'realitykings.com', 'www.realitykings.com',
+    'bangbros.com', 'www.bangbros.com', 'naughtyamerica.com', 'www.naughtyamerica.com',
+    'onlyfans.com', 'www.onlyfans.com', 'fansly.com', 'www.fansly.com',
+    'chaturbate.com', 'www.chaturbate.com', 'stripchat.com', 'www.stripchat.com',
+    'livejasmin.com', 'www.livejasmin.com', 'cam4.com', 'www.cam4.com',
+    'bongacams.com', 'www.bongacams.com', 'myfreecams.com', 'www.myfreecams.com',
+    'adultfriendfinder.com', 'www.adultfriendfinder.com', 'ashleymadison.com',
+    'www.ashleymadison.com', 'pornhd.com', 'www.pornhd.com', 'eporner.com',
+    'www.eporner.com', 'hqporner.com', 'www.hqporner.com', 'tnaflix.com',
+    'www.tnaflix.com', 'drtuber.com', 'www.drtuber.com', 'sunporno.com',
+    'www.sunporno.com', 'porn.com', 'www.porn.com', 'porntube.com',
+    'www.porntube.com', 'slutload.com', 'www.slutload.com', 'keezmovies.com',
+    'www.keezmovies.com', 'extremetube.com', 'www.extremetube.com',
+    'alphaporno.com', 'www.alphaporno.com', 'nudevista.com', 'www.nudevista.com',
+    'pornmd.com', 'www.pornmd.com', 'sex.com', 'www.sex.com', 'xxx.com',
+    'www.xxx.com', 'pornoxo.com', 'www.pornoxo.com', 'beeg.com', 'www.beeg.com',
+    'txxx.com', 'www.txxx.com', 'hclips.com', 'www.hclips.com', 'upornia.com',
+    'www.upornia.com', 'hotmovs.com', 'www.hotmovs.com', 'vxxx.com', 'www.vxxx.com',
+    'xmoviesforyou.com', 'www.xmoviesforyou.com', 'porngo.com', 'www.porngo.com',
+    'anyporn.com', 'www.anyporn.com', 'pornhat.com', 'www.pornhat.com',
+    'yespornplease.com', 'www.yespornplease.com', 'porn300.com', 'www.porn300.com',
+    'porndig.com', 'www.porndig.com', 'fapster.xxx', 'www.fapster.xxx',
+    'rule34.xxx', 'www.rule34.xxx', 'e621.net', 'www.e621.net',
+    'nhentai.net', 'www.nhentai.net', 'hitomi.la', 'www.hitomi.la',
+    'fakku.net', 'www.fakku.net', 'hentaihaven.org', 'www.hentaihaven.org',
+    'hanime.tv', 'www.hanime.tv', 'hentaigasm.com', 'www.hentaigasm.com',
+    'xhamster.desi', 'www.xhamster.desi', 'xvideos2.com', 'www.xvideos2.com',
+    'pornhub.org', 'www.pornhub.org', 'pornhub.net', 'www.pornhub.net',
+    'xvideos.red', 'www.xvideos.red', 'xnxx.tv', 'www.xnxx.tv',
+    'xhamster.one', 'www.xhamster.one', 'xhamster2.com', 'www.xhamster2.com',
+    'pornfiles.org', 'www.pornfiles.org', 'motherless.com', 'www.motherless.com',
+    'imagefap.com', 'www.imagefap.com', 'redgifs.com', 'www.redgifs.com',
+    'gfycat.com', 'www.gfycat.com', 'erome.com', 'www.erome.com',
+    'pornpics.com', 'www.pornpics.com', 'sexvid.xxx', 'www.sexvid.xxx',
+    'pornzog.com', 'www.pornzog.com', 'pornktube.com', 'www.pornktube.com',
+    'pornone.com', 'www.pornone.com', 'xozilla.com', 'www.xozilla.com',
+    'porndoe.com', 'www.porndoe.com', 'porntrex.com', 'www.porntrex.com',
+    'xfreehd.com', 'www.xfreehd.com', 'pornburst.xxx', 'www.pornburst.xxx',
+    'tubegalore.com', 'www.tubegalore.com', 'pornheed.com', 'www.pornheed.com',
+    'heavy-r.com', 'www.heavy-r.com', 'xtube.com', 'www.xtube.com',
+    'empflix.com', 'www.empflix.com', 'tnaflix.net', 'www.tnaflix.net',
+    'pornhubpremium.com', 'www.pornhubpremium.com', 'brazzersnetwork.com',
+    'www.brazzersnetwork.com', 'digitalplayground.com', 'www.digitalplayground.com',
+    'mofos.com', 'www.mofos.com', 'twistys.com', 'www.twistys.com',
+    'babes.com', 'www.babes.com', 'realitykings.com', 'www.realitykings.com',
+    'seancody.com', 'www.seancody.com', 'men.com', 'www.men.com',
+    'gaytube.com', 'www.gaytube.com', 'queerclick.com', 'www.queerclick.com',
+    'adultswim.com', // note: Adult Swim is not porn, but we keep strict domain matching
+  ].filter(d => d !== 'adultswim.com'); // remove false positive
+
+  const BLOCKED_KEYWORDS = [
+    'porn', 'xxx', 'sex', 'nsfw', 'adult', 'nude', 'naked', 'erotic',
+    'hentai', 'rule34', 'fap', 'jizz', 'cumshot', 'blowjob', 'handjob',
+    'anal', 'milf', 'teenporn', 'barelylegal', 'camgirl', 'camsite',
+    'onlyfans', 'fansly', 'chaturbate', 'stripchat', 'livejasmin',
+    'pornhub', 'xvideos', 'xhamster', 'redtube', 'youporn', 'xnxx',
+    'brazzers', 'bangbros', 'naughtyamerica', 'realitykings',
+    'motherless', 'imagefap', 'redgifs', 'erome', 'nhentai', 'e621',
+    'fakku', 'hanime', 'hitomi', 'hentaihaven', 'pornpics', 'sexvid',
+    'pornzog', 'pornktube', 'pornone', 'xozilla', 'porndoe', 'porntrex',
+    'xfreehd', 'pornburst', 'tubegalore', 'pornheed', 'heavy-r',
+    'xtube', 'empflix', 'tnaflix', 'pornhubpremium', 'brazzersnetwork',
+    'digitalplayground', 'mofos', 'twistys', 'babes', 'seancody',
+    'gaytube', 'queerclick', 'slut', 'whore', 'escort', 'prostitut',
+    'fetish', 'bdsm', 'bondage', 'dominatrix', 'shemale', 'transporn',
+    'lesbianporn', 'gayporn', 'bisexual', 'threesome', 'orgy',
+    'gangbang', 'creampie', 'deepthroat', 'facefuck', 'bukkake',
+    'squirting', 'masturbat', 'orgasm', 'ejaculat', 'penis', 'vagina',
+    'pussy', 'dick', 'cock', 'boobs', 'tits', 'asshole', 'analsex',
+    'oral', 'intercourse', 'hardcore', 'softcore', 'explicit',
+    'xxxvideo', 'adultvideo', 'adultfilm', 'xxxmovie', 'pornmovie',
+    'camshow', 'livesex', 'sexcam', 'webcamgirl', 'webcamsex',
+    'pornstar', 'xxxstar', 'adultstar', 'escortservice', 'hooker',
+    'callgirl', 'massageparlor', 'happyending', 'fullservice'
+  ];
+
+  function isBlockedURL(urlStr) {
+    try {
+      const u = new URL(urlStr.startsWith('http') ? urlStr : 'https://' + urlStr);
+      const host = u.hostname.toLowerCase().replace(/^www\./, '');
+      const full = (u.hostname + u.pathname + u.search).toLowerCase();
+
+      // Exact / subdomain domain match
+      for (const domain of BLOCKED_DOMAINS) {
+        const clean = domain.replace(/^www\./, '').toLowerCase();
+        if (host === clean || host.endsWith('.' + clean)) return true;
+      }
+
+      // Keyword match in host or path (word-boundary-ish)
+      for (const kw of BLOCKED_KEYWORDS) {
+        if (host.includes(kw) || full.includes(kw)) return true;
+      }
+
+      return false;
+    } catch {
+      return false;
+    }
+  }
 
   // ── storage (debounced writes so rapid typing doesn't hammer localStorage) ──
   const pendingWrites = new Map();
@@ -786,18 +790,14 @@
       return v !== null ? JSON.parse(v) : def;
     } catch (e) { return def; }
   }
-
   function escapeHTML(str) {
     const d = document.createElement('div');
     d.textContent = str;
     return d.innerHTML;
   }
-
   function $(id) { return document.getElementById(id); }
-
   // ── theme ──
   let currentTheme = load('theme', 'default');
-
   function applyTheme(id) {
     currentTheme = id;
     if (id === 'default') document.body.removeAttribute('data-theme');
@@ -805,7 +805,6 @@
     save('theme', id);
     renderThemeGrid();
   }
-
   function renderThemeGrid() {
     const grid = $('theme-grid');
     grid.innerHTML = THEMES.map(t => `
@@ -815,7 +814,6 @@
       </div>
     `).join('');
   }
-
   $('theme-grid').addEventListener('click', e => {
     const card = e.target.closest('.theme-card');
     if (card) applyTheme(card.dataset.themeId);
@@ -825,11 +823,7 @@
     const card = e.target.closest('.theme-card');
     if (card) { e.preventDefault(); applyTheme(card.dataset.themeId); }
   });
-
   // ── quick-copy buttons ──
-  // BUTTONS_VERSION is bumped whenever DEFAULT_BUTTONS gains new entries, so
-  // visitors who already have a saved list still pick up the new links
-  // (any they removed on purpose, or added themselves, are left alone).
   const BUTTONS_VERSION = 2;
   let buttons = load('buttons', DEFAULT_BUTTONS.slice());
   const savedVersion = load('buttonsVersion', 0);
@@ -844,7 +838,6 @@
     save('buttons', buttons);
     save('buttonsVersion', BUTTONS_VERSION);
   }
-
   function renderCopyButtons() {
     const container = $('copy-buttons');
     container.innerHTML = '';
@@ -862,7 +855,6 @@
     });
     container.appendChild(frag);
   }
-
   function copyText(btn, text) {
     const done = () => triggerCopied(btn);
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -871,7 +863,6 @@
       fallbackCopy(text, done);
     }
   }
-
   function fallbackCopy(text, done) {
     const ta = document.createElement('textarea');
     ta.value = text;
@@ -882,7 +873,6 @@
     document.body.removeChild(ta);
     done();
   }
-
   function triggerCopied(btn) {
     const orig = btn.innerHTML;
     btn.classList.add('copied');
@@ -892,8 +882,7 @@
     showToast('Copied to clipboard');
     setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1400);
   }
-
-  // ── button editor (rebuilds the list only on add/remove, not per keystroke) ──
+  // ── button editor ──
   function renderBtnList() {
     const list = $('btn-list');
     list.innerHTML = '';
@@ -921,7 +910,6 @@
     });
     list.appendChild(frag);
   }
-
   function addBtnItem() {
     buttons.push('');
     save('buttons', buttons);
@@ -930,16 +918,13 @@
     const inputs = document.querySelectorAll('#btn-list input');
     if (inputs.length) inputs[inputs.length - 1].focus();
   }
-
   function removeBtn(i) {
     buttons.splice(i, 1);
     save('buttons', buttons);
     renderBtnList();
     renderCopyButtons();
   }
-
   $('btn-add').addEventListener('click', addBtnItem);
-
   // ── URL loading ──
   function isValidURL(str) {
     try {
@@ -947,7 +932,6 @@
       return u.hostname.includes('.');
     } catch { return false; }
   }
-
   const RECENTS_KEY = 'recents';
   const MAX_RECENTS = 12;
   let recents = load(RECENTS_KEY, []);
@@ -969,7 +953,6 @@
     save(RECENTS_KEY, recents);
     renderRecents();
   }
-
   let errorResetTimer;
   function flagError(msg) {
     const bar = $('search-bar');
@@ -983,35 +966,33 @@
     clearTimeout(errorResetTimer);
     errorResetTimer = setTimeout(() => bar.classList.remove('has-error'), 450);
   }
-
   function loadURL() {
     const input = $('url-input');
     let raw = input.value.trim();
-
     if (!raw) return flagError('Please enter a URL');
     if (!isValidURL(raw)) return flagError("That doesn't look like a valid URL");
-
     if (!/^https?:\/\//i.test(raw)) raw = 'https://' + raw;
-    saveRecent(raw);
 
+    // Block adult / porn content
+    if (isBlockedURL(raw)) {
+      return flagError('Adult / porn content is not allowed');
+    }
+
+    saveRecent(raw);
     const target = BASE_URL + '?url=' + encodeURIComponent(raw);
     const frame = $('site-frame');
     const loadingBar = $('frame-loading-bar');
-
     $('frame-empty').style.display = 'none';
     $('frame-bar').style.display = 'flex';
     frame.style.display = 'block';
     $('frame-url-display').textContent = raw;
-
     loadingBar.classList.remove('active', 'done');
     loadingBar.style.width = '0%';
     void loadingBar.offsetWidth;
     loadingBar.classList.add('active');
-
     frame.src = target;
     $('frame-wrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
-
   $('site-frame').addEventListener('load', () => $('frame-loading-bar').classList.add('done'));
   $('go-btn').addEventListener('click', loadURL);
   $('clear-recents').addEventListener('click', () => {
@@ -1024,7 +1005,6 @@
     $('recents-panel').hidden = !$('recents-panel').hidden;
     if (!$('recents-panel').hidden) renderRecents();
   });
-
   const urlInput = $('url-input');
   urlInput.addEventListener('keydown', e => { if (e.key === 'Enter') loadURL(); });
   urlInput.addEventListener('input', () => {
@@ -1034,7 +1014,6 @@
   urlInput.addEventListener('paste', () => {
     setTimeout(() => { if (isValidURL(urlInput.value.trim())) loadURL(); }, 0);
   });
-
   // ── fullscreen ──
   let isFullscreen = false;
   function toggleFullscreen() {
@@ -1047,7 +1026,6 @@
   }
   function exitFullscreen() { if (isFullscreen) toggleFullscreen(); }
   $('fullscreen-btn').addEventListener('click', toggleFullscreen);
-
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       if (isFullscreen) { exitFullscreen(); e.preventDefault(); return; }
@@ -1059,7 +1037,6 @@
       if (tag !== 'input' && tag !== 'textarea') exitFullscreen();
     }
   });
-
   // ── settings panel ──
   function openSettings() {
     $('settings-overlay').classList.add('open');
@@ -1067,11 +1044,9 @@
     renderBtnList();
   }
   function closeSettings() { $('settings-overlay').classList.remove('open'); }
-
   $('settings-open').addEventListener('click', openSettings);
   $('settings-close').addEventListener('click', closeSettings);
   $('settings-overlay').addEventListener('click', e => { if (e.target.id === 'settings-overlay') closeSettings(); });
-
   // ── toast ──
   let toastTimer;
   function showToast(msg) {
@@ -1081,12 +1056,10 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
   }
-
-  // ── pause ambient animation while the tab is hidden, to save CPU/battery ──
+  // ── pause ambient animation while the tab is hidden ──
   document.addEventListener('visibilitychange', () => {
     document.body.classList.toggle('paused', document.hidden);
   });
-
   // ── init ──
   applyTheme(currentTheme);
   renderCopyButtons();
